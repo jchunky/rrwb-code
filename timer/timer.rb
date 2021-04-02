@@ -1,37 +1,28 @@
 module Timer
   def times(env)
-    value_s = env['interval']
-    if value_s == nil
-      raise "interval missing"
-    end
-    value = Integer(value_s)
+    interval = integer(env, "interval")
+    duration = multiple_of(env, "duration", interval)
+    departure = multiple_of(env, "departure", interval)
 
-    if value <= 0
-      raise "interval should be > 0"
-    end
-    check_interval = value
+    [interval, duration, departure]
+  end
 
-    value_s = env['duration']
-    raise "duration missing" if value_s.nil?
-    value = Integer(value_s)
-    if value <= 0
-      raise "duration should be > 0"
-    end
-    if (value % check_interval) != 0
-      raise "duration should be multiple of interval"
-    end
-    monitor_time = value
+  private
 
-    value_s = env['departure']
-    if value_s.nil?
-      raise "departure missing"
-    end
-    value = Integer(value_s)
-    raise "departure should be > 0" if value <= 0
-    if (value % check_interval) != 0
-      raise "departure should be multiple of interval"
-    end
-    departure_offset = value
-    [check_interval, monitor_time, departure_offset]
+  def multiple_of(env, attribute, interval)
+    result = integer(env, attribute)
+    raise "#{attribute} should be multiple of interval" if (result % interval) != 0
+
+    result
+  end
+
+  def integer(env, attribute)
+    result = env[attribute.to_s]
+    raise "#{attribute} missing" if result.nil?
+
+    result = Integer(result)
+    raise "#{attribute} should be > 0" if result <= 0
+
+    result
   end
 end
