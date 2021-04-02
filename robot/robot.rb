@@ -1,4 +1,4 @@
-class Robot < Struct.new(:location)
+class Robot
   attr_reader :location, :bin
 
   def move_to(location)
@@ -12,5 +12,13 @@ class Robot < Struct.new(:location)
   def release
     location.put(bin)
     @bin = nil
+  end
+
+  def to_s
+    [
+      "Robot",
+      ("location=#{location.name}" unless location.nil?),
+      ("bin=#{bin}" unless bin.nil?),
+    ].compact.join(" ")
   end
 end
