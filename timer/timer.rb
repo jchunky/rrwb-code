@@ -17,7 +17,7 @@ module Timer
   end
 
   def integer(env, attribute)
-    result = env[attribute.to_s]
+    result = env[attribute]
     raise "#{attribute} missing" if result.nil?
 
     result = Integer(result)
