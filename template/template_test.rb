@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'template'
+require_relative 'template'
 
 class TemplateTest < Test::Unit::TestCase
   include Template
