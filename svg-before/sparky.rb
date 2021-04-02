@@ -1,20 +1,13 @@
-require_relative "svg"
+require_relative "sparkline"
 
-class Sparky
-  include Svg
+def toss
+  [-1, 1].sample
+end
 
-  def create_svg(values)
-    last_value = values[-1]
-    last_x = values.size - 1
-    last_y = last_value
-
-    svg do
-      %(
-        #{line(0, 0, values.size, 0)}
-        #{polyline(values)}
-        #{rect(last_x, last_y)}
-        #{text(last_x + 6, last_y - 4, last_value)}
-      )
-    end
+def y_values
+  1000.times.each_with_object([0]) do |_, acc|
+    acc << acc.last + toss
   end
 end
+
+puts Sparkline.new(y_values).create_svg
