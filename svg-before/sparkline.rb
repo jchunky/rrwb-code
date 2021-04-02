@@ -1,7 +1,7 @@
 require_relative "svg"
 
 class Sparkline < Struct.new(:y_values)
-  def create_svg
+  def to_svg
     Svg.define { [x_axis, sparkline, spark] }
   end
 

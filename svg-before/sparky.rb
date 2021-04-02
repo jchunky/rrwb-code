@@ -10,4 +10,4 @@ def y_values
   end
 end
 
-puts Sparkline.new(y_values).create_svg
+puts Sparkline.new(y_values).to_svg
