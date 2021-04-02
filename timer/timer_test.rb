@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'timer'
+require_relative 'timer'
 
 class TimerTest < Test::Unit::TestCase
   include Timer
