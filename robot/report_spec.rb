@@ -1,6 +1,6 @@
-require 'machine'
-require 'robot'
-require 'report'
+require_relative 'machine'
+require_relative 'robot'
+require_relative 'report'
 require 'stringio'
 
 describe Report do

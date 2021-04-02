@@ -1,5 +1,5 @@
-require 'machine'
-require 'robot'
+require_relative 'machine'
+require_relative 'robot'
 
 describe Robot, 'when new' do
   before :each do

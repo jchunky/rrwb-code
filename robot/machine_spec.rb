@@ -1,4 +1,4 @@
-require 'machine'
+require_relative 'machine'
 
 describe Machine do
   before :each do
