@@ -1,5 +1,5 @@
 #button.rb
-require 'point.rb'
+require_relative 'point'
 
 class Button
   attr_accessor :name
@@ -14,7 +14,7 @@ class Button
   end
 
   def move_to(x, y)
-    @x = limit(x, @xmax) 
+    @x = limit(x, @xmax)
     @y = limit(y, @ymax)
   end
 

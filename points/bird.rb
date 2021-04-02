@@ -1,11 +1,11 @@
 # bird.rb
-require 'point.rb'
+require_relative 'point'
 
 class Bird
   attr_accessor :location
 
   def initialize max_x, max_y
-    @@max_x = max_x 
+    @@max_x = max_x
     @@max_y = max_y
     @location = Point.new 0, 0
   end

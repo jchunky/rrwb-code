@@ -1,4 +1,4 @@
-require 'bird'
+require_relative 'bird'
 require 'test/unit'
 
 class BirdTest < Test::Unit::TestCase

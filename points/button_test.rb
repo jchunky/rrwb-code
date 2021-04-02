@@ -1,4 +1,4 @@
-require 'button.rb'
+require_relative 'button'
 require 'test/unit'
 
 class ButtonTest < Test::Unit::TestCase
