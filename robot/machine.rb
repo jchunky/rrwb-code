@@ -1,16 +1,11 @@
-class Machine
-  attr_reader :name, :bin
-
-  def initialize(name, location)
-    @name = name
-    @location = location
-  end
+class Machine < Struct.new(:name, :location)
+  attr_reader :bin
 
   def take
     result = @bin
     @bin = nil
-    return result
-  end	
+    result
+  end
 
   def put(bin)
     @bin = bin

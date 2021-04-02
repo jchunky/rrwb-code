@@ -1,4 +1,4 @@
-class Robot
+class Robot < Struct.new(:location)
   attr_reader :location, :bin
 
   def move_to(location)
@@ -6,11 +6,11 @@ class Robot
   end
 
   def pick
-    @bin = @location.take
+    @bin = location.take
   end
 
   def release
-    @location.put(@bin)
+    location.put(bin)
     @bin = nil
   end
 end
