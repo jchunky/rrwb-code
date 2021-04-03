@@ -1,8 +1,9 @@
-class Point
-  attr_accessor :x, :y
+class Point < Struct.new(:x, :y)
+  def +(other)
+    self.class.new(x + other.x, y + other.y)
+  end
 
-  def initialize(x, y)
-    @x = x
-    @y = y
+  def %(other)
+    self.class.new(x % other.x, y % other.y)
   end
 end

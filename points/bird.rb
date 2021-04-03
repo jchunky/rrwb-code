@@ -9,8 +9,6 @@ class Bird
   end
 
   def move_by(point)
-    x = (@location.x + point.x) % @max.x
-    y = (@location.y + point.y) % @max.y
-    @location = Point.new(x, y)
+    @location = (@location + point) % @max
   end
 end
