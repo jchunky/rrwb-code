@@ -1,32 +1,20 @@
-#button.rb
-require_relative 'point'
+require_relative "wrapping_point"
 
 class Button
-  attr_accessor :name
-  attr_accessor :x, :y
-
-  def initialize name, x_limit, y_limit
+  def initialize(name, max_x, max_y)
     @name = name
-    @xmax = x_limit
-    @ymax = y_limit
-    @x = 0
-    @y = 0
+    @location = WrappingPoint.new(0, 0, max_x, max_y)
   end
 
   def move_to(x, y)
-    @x = limit(x, @xmax)
-    @y = limit(y, @ymax)
+    @location = @location.move_to(x, y)
   end
 
-private
-  def limit(v, vmax)
-    result = v
-    while result >= vmax
-      result -= vmax
-    end
-    while result < 0
-      result += vmax
-    end
-    result
+  def x
+    @location.x
+  end
+
+  def y
+    @location.y
   end
 end
