@@ -1,32 +1,18 @@
-#button.rb
-require_relative 'point'
+require_relative "point"
+require "active_support/all"
 
 class Button
-  attr_accessor :name
-  attr_accessor :x, :y
+  attr_reader :name, :max, :location
 
-  def initialize name, x_limit, y_limit
+  delegate :x, :y, to: :location
+
+  def initialize(name, max_x, max_y)
     @name = name
-    @xmax = x_limit
-    @ymax = y_limit
-    @x = 0
-    @y = 0
+    @max = Point.new(max_x, max_y)
+    @location = Point.new(0, 0)
   end
 
   def move_to(x, y)
-    @x = limit(x, @xmax)
-    @y = limit(y, @ymax)
-  end
-
-private
-  def limit(v, vmax)
-    result = v
-    while result >= vmax
-      result -= vmax
-    end
-    while result < 0
-      result += vmax
-    end
-    result
+    @location = Point.new(x % max.x, y % max.y)
   end
 end
