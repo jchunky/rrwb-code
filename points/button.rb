@@ -7,9 +7,7 @@ class Button
   delegate :x, :y, to: :location
 
   def initialize(name, max_x, max_y)
-    point = Point.new(0, 0)
-    max = Point.new(max_x, max_y)
-    @location = WrappingPoint.new(point, max)
+    @location = WrappingPoint.for(0, 0, max_x, max_y)
     @name = name
   end
 
