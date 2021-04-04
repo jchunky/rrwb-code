@@ -12,6 +12,7 @@ class Button
   end
 
   def move_to(x, y)
-    @location = @location.move_to(x, y)
+    point = Point.new(x, y)
+    @location = @location.move_to(point)
   end
 end

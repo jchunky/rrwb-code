@@ -1,4 +1,5 @@
 require "active_support/all"
+require_relative "point"
 
 class WrappingPoint
   attr_reader :point, :max
@@ -10,11 +11,15 @@ class WrappingPoint
     @point = Point.new(x, y) % @max
   end
 
-  def move_to(x, y)
-    self.class.new(x, y, max.x, max.y)
+  def move_to(point)
+    build(point)
   end
 
   def move_by(other)
-    self.class.new(x + other.x, y + other.y, max.x, max.y)
+    build(point + other)
+  end
+
+  def build(point)
+    self.class.new(point.x, point.y, max.x, max.y)
   end
 end
