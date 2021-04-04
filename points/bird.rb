@@ -1,3 +1,4 @@
+require_relative "point"
 require_relative "wrapping_point"
 
 class Bird
@@ -8,6 +9,6 @@ class Bird
   end
 
   def move_by(point)
-    @location = @location.move_by(point.x, point.y)
+    @location = @location.move_by(point)
   end
 end
