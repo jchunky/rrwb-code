@@ -6,9 +6,9 @@ class WrappingPoint
 
   delegate :x, :y, to: :point
 
-  def initialize(x, y, max_x, max_y)
-    @max = Point.new(max_x, max_y)
-    @point = Point.new(x, y) % @max
+  def initialize(point, max)
+    @point = point % max
+    @max = max
   end
 
   def move_to(point)
@@ -20,6 +20,6 @@ class WrappingPoint
   end
 
   def build(point)
-    self.class.new(point.x, point.y, max.x, max.y)
+    self.class.new(point, max)
   end
 end
