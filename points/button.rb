@@ -1,4 +1,4 @@
-require_relative "point"
+require_relative "wrapping_point"
 require "active_support/all"
 
 class Button
@@ -8,11 +8,10 @@ class Button
 
   def initialize(name, max_x, max_y)
     @name = name
-    @max = Point.new(max_x, max_y)
-    @location = Point.new(0, 0)
+    @location = WrappingPoint.new(0, 0, max_x, max_y)
   end
 
   def move_to(x, y)
-    @location = Point.new(x, y) % max
+    @location = @location.move_to(x, y)
   end
 end

@@ -1,5 +1,6 @@
-require_relative 'bird'
-require 'test/unit'
+require_relative "bird"
+require_relative "point"
+require "test/unit"
 
 class BirdTest < Test::Unit::TestCase
   def test_location_wraps
@@ -10,4 +11,3 @@ class BirdTest < Test::Unit::TestCase
     assert_equal(0, bird.location.y)
   end
 end
-
