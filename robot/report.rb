@@ -1,16 +1,33 @@
-class Report
-  def self.report(out, machines, robot)
-    out.print "FACTORY REPORT\n"
-    machines.each do |machine|
-      out.print "Machine #{machine.name}"
-      out.print " bin=#{machine.bin}" unless machine.bin.nil?
-      out.print "\n"
-    end
-    out.print "\n"
-    out.print "Robot"
-    out.print " location=#{robot.location.name}" unless robot.location.nil?
-    out.print " bin=#{robot.bin}" unless robot.bin.nil?
-    out.print "\n"
-    out.print "========\n"
+module Report
+  extend self
+
+  def report(out, machines, robot)
+    out.print [
+      "FACTORY REPORT",
+      machines.map do |machine|
+        render_machine(machine)
+      end,
+      "",
+      render_robot(robot),
+      "========",
+      "",
+    ].join("\n")
+  end
+
+  private
+
+  def render_machine(machine)
+    [
+      "Machine #{machine.name}",
+      machine.bin && " bin=#{machine.bin}",
+    ].compact.join
+  end
+
+  def render_robot(robot)
+    [
+      "Robot",
+      robot.location && " location=#{robot.location.name}",
+      robot.bin && " bin=#{robot.bin}",
+    ].compact.join
   end
 end

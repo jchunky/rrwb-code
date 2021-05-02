@@ -24,13 +24,13 @@ describe Report do
     Report.report(out, line, robot)
 
     expected = <<~END_OF_EXPECTED
-            FACTORY REPORT
-            Machine mixer
-            Machine extruder
-            Machine oven bin=chips
-      #{'      '}
-            Robot location=extruder bin=paste
-            ========
+      FACTORY REPORT
+      Machine mixer
+      Machine extruder
+      Machine oven bin=chips
+
+      Robot location=extruder bin=paste
+      ========
     END_OF_EXPECTED
     out.string.should == expected
   end
