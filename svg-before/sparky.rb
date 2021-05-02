@@ -34,7 +34,7 @@ module Sparkline
       [
         svg.line(x1: 0, y1: 0, x2: points.size, y2: 0),
         svg.sparkline(points),
-        svg.spark(x: points.size - 1, y: points.last.y, value: points.last.y),
+        svg.spark(x: points.last.x, y: points.last.y, value: points.last.y),
       ]
     end
   end
@@ -48,7 +48,7 @@ module Svg
   def render
     %(
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
-        #{yield(self).join}
+        #{yield(self).join("\n")}
       </svg>
     )
   end
