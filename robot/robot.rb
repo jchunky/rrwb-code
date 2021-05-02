@@ -1,6 +1,10 @@
 class Robot
   attr_reader :location, :bin
 
+  def initialize
+    @bin = nil
+  end
+
   def move_to(location)
     @location = location
   end
@@ -12,5 +16,13 @@ class Robot
   def release
     @location.put(@bin)
     @bin = nil
+  end
+
+  def to_s
+    [
+      "Robot",
+      location && " location=#{location.name}",
+      bin && " bin=#{bin}",
+    ].join
   end
 end

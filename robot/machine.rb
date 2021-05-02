@@ -4,6 +4,7 @@ class Machine
   def initialize(name, location)
     @name = name
     @location = location
+    @bin = nil
   end
 
   def take
@@ -14,5 +15,12 @@ class Machine
 
   def put(bin)
     @bin = bin
+  end
+
+  def to_s
+    [
+      "Machine #{name}",
+      bin && " bin=#{bin}",
+    ].join
   end
 end
