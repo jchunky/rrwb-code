@@ -1,14 +1,12 @@
-require 'forwardable'
-
 class SimpleQueue
-  extend Forwardable
+  attr_reader :elements
+
+  delegate :shift, :push, :clear, :first, :length, to: :elements
+
+  alias remove_front shift
+  alias add_rear push
 
   def initialize
     @elements = []
   end
-
-  def_delegator :@elements, :shift, :remove_front
-  def_delegator :@elements, :push, :add_rear
-  
-  def_delegators :@elements, :clear, :first, :length
 end
