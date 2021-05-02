@@ -9,8 +9,8 @@ class Machine
   def take
     result = @bin
     @bin = nil
-    return result
-  end	
+    result
+  end
 
   def put(bin)
     @bin = bin
