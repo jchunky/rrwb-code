@@ -1,10 +1,17 @@
-class ArrayQueue < Array
+class ArrayQueue
+  def initialize
+    @array = []
+  end
 
   def add_rear(s)
-    self << s
+    @array << s
   end
 
   def remove_front
-    self.delete_at(0)
+    @array.delete_at(0)
+  end
+
+  def length
+    @array.length
   end
 end
