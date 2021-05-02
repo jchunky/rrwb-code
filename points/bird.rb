@@ -1,17 +1,14 @@
-# bird.rb
-require_relative 'point'
+require_relative "point"
 
 class Bird
-  attr_accessor :location
+  attr_reader :location, :max
 
-  def initialize max_x, max_y
-    @@max_x = max_x
-    @@max_y = max_y
-    @location = Point.new 0, 0
+  def initialize(max_x, max_y)
+    @max = Point.new(max_x, max_y)
+    @location = Point.new(0, 0)
   end
 
   def move_by(point)
-    @location.x = (@location.x + point.x) % @@max_x
-    @location.y = (@location.y + point.y) % @@max_y
+    @location = (location + point) % max
   end
 end
