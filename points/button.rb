@@ -1,16 +1,15 @@
-require_relative "point"
+require_relative "wrapping_point"
 
 class Button
   attr_reader :name
 
   def initialize(name, x_limit, y_limit)
     @name = name
-    @max = Point.new(x_limit, y_limit)
-    @location = Point.new(0, 0)
+    @location = WrappingPoint.new(0, 0, x_limit, y_limit)
   end
 
   def move_to(x, y)
-    @location = Point.new(x, y) % @max
+    @location = @location.move_to(x, y)
   end
 
   def x

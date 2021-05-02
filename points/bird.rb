@@ -4,11 +4,10 @@ class Bird
   attr_reader :location, :max
 
   def initialize(max_x, max_y)
-    @max = Point.new(max_x, max_y)
-    @location = Point.new(0, 0)
+    @location = WrappingPoint.new(0, 0, max_x, max_y)
   end
 
   def move_by(point)
-    @location = (location + point) % max
+    @location = @location.move_by(point)
   end
 end
