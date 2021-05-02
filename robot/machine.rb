@@ -4,11 +4,12 @@ class Machine
   def initialize(name, location)
     @name = name
     @location = location
+    @bin = NullBin.new
   end
 
   def take
     result = @bin
-    @bin = nil
+    @bin = NullBin.new
     result
   end
 
@@ -19,7 +20,7 @@ class Machine
   def to_s
     [
       "Machine #{name}",
-      bin && " bin=#{bin}",
+      bin,
     ].join
   end
 end

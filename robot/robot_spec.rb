@@ -1,3 +1,5 @@
+require_relative "bin"
+require_relative "null_bin"
 require_relative "machine"
 require_relative "robot"
 
@@ -11,7 +13,7 @@ describe Robot, "when new" do
   end
 
   it "does not point at a bin yet" do
-    @robot.bin.should be_nil
+    @robot.bin.should == NullBin.new
   end
 end
 
@@ -19,7 +21,7 @@ describe Robot, "in a world with machines" do
   before :each do
     @robot = Robot.new
     @sorter = Machine.new("Sorter", "left")
-    @sorter.put("chips")
+    @sorter.put(Bin.new("chips"))
     @oven = Machine.new("Oven", "middle")
   end
 
@@ -35,7 +37,7 @@ describe Robot, "in a world with machines" do
       lambda {
         @robot.move_to(@sorter)
         @robot.pick
-      }.should change { @sorter.bin }.from("chips").to(nil)
+      }.should change { @sorter.bin }.from(Bin.new("chips")).to(NullBin.new)
     end
   end
 
@@ -50,13 +52,13 @@ describe Robot, "in a world with machines" do
     it "should take the bin away from the sorter" do
       lambda {
         move_and_pick_and_move_and_release
-      }.should change { @sorter.bin }.from("chips").to(nil)
+      }.should change { @sorter.bin }.from(Bin.new("chips")).to(NullBin.new)
     end
 
     it "should deposit the bin at the oven" do
       lambda {
         move_and_pick_and_move_and_release
-      }.should change { @oven.bin }.from(nil).to("chips")
+      }.should change { @oven.bin }.from(NullBin.new).to(Bin.new("chips"))
     end
   end
 end

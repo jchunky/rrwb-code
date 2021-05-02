@@ -9,11 +9,11 @@ describe Report do
     line << Machine.new("mixer", "left")
 
     extruder = Machine.new("extruder", "center")
-    extruder.put("paste")
+    extruder.put(Bin.new("paste"))
     line << extruder
 
     oven = Machine.new("oven", "right")
-    oven.put("chips")
+    oven.put(Bin.new("chips"))
     line << oven
 
     robot = Robot.new

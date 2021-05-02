@@ -1,3 +1,5 @@
+require_relative "bin"
+require_relative "null_bin"
 require_relative "machine"
 
 describe Machine do
@@ -6,11 +8,11 @@ describe Machine do
   end
 
   it "should initially have no bin" do
-    @machine.bin.should be_nil
+    @machine.bin.should == NullBin.new
   end
 
   it "should accept things into its bin" do
-    @machine.put("chips")
-    @machine.bin.should == "chips"
+    @machine.put(Bin.new("chips"))
+    @machine.bin.should == Bin.new("chips")
   end
 end
