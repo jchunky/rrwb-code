@@ -1,13 +1,13 @@
 require 'test/unit'
-require 'checkpoint'
+require_relative 'checkpoint'
 
 class Customer
   attr_reader :first, :last, :ssn
-  
+
   def initialize(first, last, ssn)
     @first, @last, @ssn = first, last, ssn
   end
-  
+
   def marries(other)
     @last = other.last
   end

@@ -1,5 +1,5 @@
-require 'agency'
-require 'theater'
+require_relative 'agency'
+require_relative 'theater'
 require 'test/unit'
 
 class BookingTest < Test::Unit::TestCase

@@ -1,7 +1,7 @@
 require 'tk'
-require 'value'
-require 'calculator'
-require 'calc_controller'
+require_relative 'value'
+require_relative 'calculator'
+require_relative 'calc_controller'
 
 @my_font = TkFont.new('helvetica 20 bold')
 @calculator = Calculator.new(Value.new 0, Dimension.new)
@@ -13,12 +13,12 @@ def push
 end
 
 def pop
-  @controller.pop 
+  @controller.pop
   @my_text.value = @controller
 end
 
 def cab
-  @controller.cab  
+  @controller.cab
   @my_text.value = @controller
 end
 
@@ -29,7 +29,7 @@ end
 
 def plus
   @controller.plus
-  @my_text.value = @controller  
+  @my_text.value = @controller
 end
 
 def minus
@@ -58,12 +58,12 @@ def extend_number n
 end
 
 def plus_old
-  @calculator.binary_op(lambda{|a,b| a+b})  
+  @calculator.binary_op(lambda{|a,b| a+b})
   @my_text.value = @calculator
 end
 
 def make_button frame, name, p
-  TkButton.new(frame, :text=>name, :font=>@my_font, :command =>p)   
+  TkButton.new(frame, :text=>name, :font=>@my_font, :command =>p)
 end
 
 def make_digit root, number
@@ -81,7 +81,7 @@ output_frame = TkFrame.new(root).pack(
   'padx'=>10,
   'pady'=>10,
   'fill'=>'both')
-  
+
 button_frame = TkFrame.new(root).pack(
   'side'=>'bottom',
   'padx'=>10,
@@ -96,7 +96,7 @@ button_frame = TkFrame.new(root).pack(
       justify 'right'
       border 5
     }.pack(
-      'fill'=>'y', 
+      'fill'=>'y',
       'expand'=>'true')
 
 @calculated_result.textvariable = @my_text
@@ -148,5 +148,5 @@ buttons.each_index { |i|
     'padx'=>5,
     'pady'=>5)
 }
-    
+
 Tk.mainloop

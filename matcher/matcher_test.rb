@@ -1,4 +1,4 @@
-require 'matcher'
+require_relative 'matcher'
 require 'test/unit'
 
 class MatcherTest < Test::Unit::TestCase

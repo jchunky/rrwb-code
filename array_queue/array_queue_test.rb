@@ -1,4 +1,4 @@
-require 'array_queue'
+require_relative 'array_queue'
 require 'test/unit'
 
 class ArrayQueueTest < Test::Unit::TestCase

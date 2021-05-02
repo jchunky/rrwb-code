@@ -1,6 +1,6 @@
-require 'value'
-require 'calculator'
-require 'calc_controller'
+require_relative 'value'
+require_relative 'calculator'
+require_relative 'calc_controller'
 
 # Run with: spec calc_controller_spec.rb --format specdoc
 
@@ -9,13 +9,13 @@ describe Calc_Controller, "for an empty calculator" do
     @calc = Calculator.new(Value.new(0, Dimension.new))
     @controller = Calc_Controller.new @calc
   end
-    
+
   it "extends digits" do
     @controller.digit  3
     @controller.digit 4
     @calc.to_s.should == '34'
   end
-  
+
   it "clears number and extends units when the top is calculated" do
     @calc.push(Value.new(1, Dimension.new))
     @calc.push(Value.new(2, Dimension.new))
@@ -29,25 +29,25 @@ describe Calc_Controller, "for an empty calculator" do
     @controller.unit(Dimension.new({"s"=>-1}))
     @calc.to_s.should == "7*1/s"
   end
-  
+
   it "pushes an empty value" do
     @calc.push(Value.new(8, Dimension.new))
     @controller.push
     @calc.to_s.should == '0'
   end
-  
+
   it "can pop what was pushed" do
     @calc.push(Value.new(9, Dimension.new))
     @controller.pop
     @controller.to_s.should == '0'
   end
-  
+
   it "can rotate (cab) what's on the stack" do
       @calc.push 'c'
       @calc.push 'b'
       @calc.push 'a'
       @controller.to_s.should == 'a'   # check setup
-      
+
       @controller.cab
       @controller.to_s.should == 'c'
       @controller.pop
@@ -63,7 +63,7 @@ describe Calc_Controller, "for an empty calculator" do
     @controller.swap
     @controller.to_s.should == 'b'
   end
-  
+
   it "can apply operations" do
     @calc.push(Value.new(10, Dimension.new))
     @calc.push(Value.new(11, Dimension.new))
@@ -74,7 +74,7 @@ describe Calc_Controller, "for an empty calculator" do
     @controller.times
     @calc.push(Value.new(4, Dimension.new))
     @controller.divide
-    @controller.to_s.should == '9'    
+    @controller.to_s.should == '9'
   end
-  
+
 end

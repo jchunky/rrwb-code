@@ -1,4 +1,4 @@
-require 'csv_formatter'
+require_relative 'csv_formatter'
 require 'test/unit'
 
 class CsvFormatterTest < Test::Unit::TestCase

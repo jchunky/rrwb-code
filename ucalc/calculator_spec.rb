@@ -1,5 +1,5 @@
-require 'value'
-require 'calculator'
+require_relative 'value'
+require_relative 'calculator'
 
 # Run with: spec calculator_spec.rb --format specdoc
 
@@ -7,11 +7,11 @@ describe Calculator, "for an empty calculator" do
   before do
     @calc = Calculator.new(Value.new(0, Dimension.new))
   end
-    
+
   it "starts out considered to be calculated" do
     @calc.is_calculated.should == true
   end
-  
+
   it "has the default value all the way down" do
     (@calc.top).should == Value.new(0, Dimension.new)
     @calc.pop
@@ -23,7 +23,7 @@ describe Calculator, "for an empty calculator" do
     (@calc.top).should == 20
     @calc.is_calculated.should == false
   end
-  
+
   it "can pop what was pushed" do
     @calc.push 17
     @calc.push 19
@@ -32,14 +32,14 @@ describe Calculator, "for an empty calculator" do
     @calc.pop
     (@calc.top).should == 17
   end
-  
+
   it "treats a pushed-and-popped item as newly calculated" do
       @calc.push 17
       @calc.push 18
       @calc.pop
       @calc.is_calculated.should == true
   end
-  
+
 end
 
 describe Calculator, "for a calculator with values" do
@@ -49,26 +49,26 @@ describe Calculator, "for a calculator with values" do
     @calc.push 15
     @calc.push 5
   end
-    
+
   it "can add" do
     @calc.plus
     @calc.plus
     @calc.top.should == 22
     @calc.is_calculated.should == true
   end
-  
+
   it "can subtract" do
     @calc.minus
     @calc.top.should == 10
     @calc.is_calculated.should == true
   end
-  
+
   it "can multiply" do
     @calc.times
     @calc.top.should == 75
     @calc.is_calculated.should == true
   end
-  
+
   it "can divide" do
     @calc.divide
     @calc.top.should == 3

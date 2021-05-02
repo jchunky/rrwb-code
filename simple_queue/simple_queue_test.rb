@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'simple_queue'
+require_relative 'simple_queue'
 
 class SimpleQueueTest < Test::Unit::TestCase
   def testQ

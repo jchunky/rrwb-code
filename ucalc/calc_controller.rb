@@ -1,6 +1,6 @@
-require 'calculator'
-require 'value'
-require 'dimension'
+require_relative 'calculator'
+require_relative 'value'
+require_relative 'dimension'
 
 class Calc_Controller
 
@@ -9,7 +9,7 @@ def initialize calculator
   @calculated = false
 end
 
-def digit n 
+def digit n
   @calculator.extend(n)
 end
 
@@ -23,13 +23,13 @@ def unit arg
     value *= (Value.new 1, arg)
     @calculator.push value
   end
-  
-  @calculator.is_calculated = false 
+
+  @calculator.is_calculated = false
 end
 
 def push
   @calculator.push(Value.new(0, Dimension.new))
-  @calculator.is_calculated = false 
+  @calculator.is_calculated = false
 end
 
 def pop
@@ -47,7 +47,7 @@ def cab
   @calculator.push b
   @calculator.push a
   @calculator.push c
-  
+
   @calculator.is_calculated = true
 end
 
@@ -72,11 +72,11 @@ def divide
 end
 
 def plus_old
- @calculator.binary_op(lambda{|a,b| a+b})  
+ @calculator.binary_op(lambda{|a,b| a+b})
 end
 
 def to_s
-  @calculator.to_s  
+  @calculator.to_s
 end
 
 end

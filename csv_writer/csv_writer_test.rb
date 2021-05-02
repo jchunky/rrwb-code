@@ -1,4 +1,4 @@
-require 'csv_writer'
+require_relative 'csv_writer'
 require 'test/unit'
 
 class CsvWriterTest < Test::Unit::TestCase
@@ -13,7 +13,7 @@ class CsvWriterTest < Test::Unit::TestCase
     lines << [',', 'embedded , commas, included', 'trailing,']
     lines << ['"', 'embedded " quotes', 'multiple """ quotes""']
     lines << ['mixed commas, and "quotes"', 'simple field']
- 
+
     # Expected:
     # -- (empty line)
     # only one field

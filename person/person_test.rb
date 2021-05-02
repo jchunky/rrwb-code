@@ -1,7 +1,7 @@
 require 'stringio'
 require 'test/unit'
 
-require 'person'
+require_relative 'person'
 
 class PersonClient < Test::Unit::TestCase
 

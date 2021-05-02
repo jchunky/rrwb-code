@@ -1,5 +1,5 @@
 require 'test/unit'
-load 'timelog.rb'
+require_relative'timelog'
 
 class TimelogTest < Test::Unit::TestCase
   def setup
@@ -10,7 +10,7 @@ class TimelogTest < Test::Unit::TestCase
     assert_equal('', `ruby timelog/timelog.rb -u jim -h 7 proj1`)
     assert_equal('', `ruby timelog/timelog.rb -u alice -h 4.5 proj1`)
   end
-  
+
   def teardown
     if File.exist?(TIMELOG_FILE)
       assert_equal(@varlog_size, File.size(TIMELOG_FILE),
