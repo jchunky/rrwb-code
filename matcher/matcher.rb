@@ -1,4 +1,6 @@
-class Matcher
+module Matcher
+  extend self
+
   def match(expected, actual, clip_limit, delta)
     actual = clip(actual, clip_limit)
 
