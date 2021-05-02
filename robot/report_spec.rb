@@ -1,10 +1,10 @@
-require_relative 'machine'
-require_relative 'robot'
-require_relative 'report'
-require 'stringio'
+require_relative "machine"
+require_relative "robot"
+require_relative "report"
+require "stringio"
 
 describe Report do
-  it 'should report the state of everything' do
+  it "should report the state of everything" do
     line = []
     line << Machine.new("mixer", "left")
 
@@ -23,15 +23,15 @@ describe Report do
     out = StringIO.new
     Report.report(out, line, robot)
 
-    expected = <<END_OF_EXPECTED
-FACTORY REPORT
-Machine mixer
-Machine extruder
-Machine oven bin=chips
+    expected = <<~END_OF_EXPECTED
+      FACTORY REPORT
+      Machine mixer
+      Machine extruder
+      Machine oven bin=chips
 
-Robot location=extruder bin=paste
-========
-END_OF_EXPECTED
+      Robot location=extruder bin=paste
+      ========
+    END_OF_EXPECTED
     out.string.should == expected
   end
 end

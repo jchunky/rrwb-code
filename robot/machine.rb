@@ -9,10 +9,17 @@ class Machine
   def take
     result = @bin
     @bin = nil
-    return result
-  end	
+    result
+  end
 
   def put(bin)
     @bin = bin
+  end
+
+  def to_s
+    [
+      "Machine #{name}",
+      bin && " bin=#{bin}",
+    ].join
   end
 end
