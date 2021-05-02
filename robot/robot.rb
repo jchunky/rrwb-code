@@ -1,3 +1,5 @@
+require_relative "bin"
+
 class Robot
   attr_reader :location, :bin
 
@@ -22,7 +24,7 @@ class Robot
     [
       "Robot",
       location && " location=#{location.name}",
-      bin && " bin=#{bin}",
+      Bin.build(@bin),
     ].join
   end
 end

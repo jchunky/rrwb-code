@@ -1,3 +1,5 @@
+require_relative "bin"
+
 class Machine
   attr_reader :name, :bin
 
@@ -20,7 +22,7 @@ class Machine
   def to_s
     [
       "Machine #{name}",
-      bin && " bin=#{bin}",
+      Bin.build(@bin),
     ].join
   end
 end
