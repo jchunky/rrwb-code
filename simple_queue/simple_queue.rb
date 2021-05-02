@@ -1,12 +1,17 @@
 class SimpleQueue
   attr_reader :elements
 
-  delegate :shift, :push, :clear, :first, :length, to: :elements
-
-  alias remove_front shift
-  alias add_rear push
+  delegate :clear, :first, :length, to: :elements
 
   def initialize
     @elements = []
+  end
+
+  def remove_front
+    elements.shift
+  end
+
+  def add_rear(element)
+    elements.push(element)
   end
 end
