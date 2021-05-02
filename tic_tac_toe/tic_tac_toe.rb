@@ -11,21 +11,19 @@ class Game
   end
 
   def winner
-    3.times.each do |i|
-      win = winner_at_location(col(i))
-      return win if win
-    end
-    3.times.each do |i|
-      win = winner_at_location(row(i))
-      return win if win
-    end
+    winning_squares = rows_and_columns.find(&method(:winner_at_location?))
+    return winning_squares.first if winning_squares
 
     "-"
   end
 
   private
 
-  def winner_at_location(squares)
+  def rows_and_columns
+    3.times.map { |i| col(i) } + 3.times.map { |i| row(i) }
+  end
+
+  def winner_at_location?(squares)
     squares.uniq.one? && squares.first != "-" && squares.first
   end
 
