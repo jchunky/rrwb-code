@@ -13,3 +13,8 @@ class Bin
     id == other.id
   end
 end
+
+NO_BIN = Bin.new("")
+def NO_BIN.to_s
+  ""
+end

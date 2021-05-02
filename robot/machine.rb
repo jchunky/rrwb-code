@@ -4,12 +4,12 @@ class Machine
   def initialize(name, location)
     @name = name
     @location = location
-    @bin = NullBin.new
+    @bin = NO_BIN
   end
 
   def take
     result = @bin
-    @bin = NullBin.new
+    @bin = NO_BIN
     result
   end
 

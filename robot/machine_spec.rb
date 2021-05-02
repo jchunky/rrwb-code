@@ -8,7 +8,7 @@ describe Machine do
   end
 
   it "should initially have no bin" do
-    @machine.bin.should == NullBin.new
+    @machine.bin.should == NO_BIN
   end
 
   it "should accept things into its bin" do

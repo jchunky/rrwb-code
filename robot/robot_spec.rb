@@ -13,7 +13,7 @@ describe Robot, "when new" do
   end
 
   it "does not point at a bin yet" do
-    @robot.bin.should == NullBin.new
+    @robot.bin.should == NO_BIN
   end
 end
 
@@ -37,7 +37,7 @@ describe Robot, "in a world with machines" do
       lambda {
         @robot.move_to(@sorter)
         @robot.pick
-      }.should change { @sorter.bin }.from(Bin.new("chips")).to(NullBin.new)
+      }.should change { @sorter.bin }.from(Bin.new("chips")).to(NO_BIN)
     end
   end
 
@@ -52,13 +52,13 @@ describe Robot, "in a world with machines" do
     it "should take the bin away from the sorter" do
       lambda {
         move_and_pick_and_move_and_release
-      }.should change { @sorter.bin }.from(Bin.new("chips")).to(NullBin.new)
+      }.should change { @sorter.bin }.from(Bin.new("chips")).to(NO_BIN)
     end
 
     it "should deposit the bin at the oven" do
       lambda {
         move_and_pick_and_move_and_release
-      }.should change { @oven.bin }.from(NullBin.new).to(Bin.new("chips"))
+      }.should change { @oven.bin }.from(NO_BIN).to(Bin.new("chips"))
     end
   end
 end

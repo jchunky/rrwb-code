@@ -2,7 +2,7 @@ class Robot
   attr_reader :location, :bin
 
   def initialize
-    @bin = NullBin.new
+    @bin = NO_BIN
   end
 
   def move_to(location)
@@ -15,7 +15,7 @@ class Robot
 
   def release
     @location.put(@bin)
-    @bin = NullBin.new
+    @bin = NO_BIN
   end
 
   def to_s
