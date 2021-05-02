@@ -1,5 +1,4 @@
 require_relative "bin"
-require_relative "null_bin"
 require_relative "machine"
 
 describe Machine do
