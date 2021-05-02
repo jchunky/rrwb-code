@@ -1,13 +1,13 @@
-require 'test/unit'
-require 'checkpoint'
+require "test/unit"
+require_relative "checkpoint"
 
 class Customer
   attr_reader :first, :last, :ssn
-  
+
   def initialize(first, last, ssn)
     @first, @last, @ssn = first, last, ssn
   end
-  
+
   def marries(other)
     @last = other.last
   end
@@ -19,6 +19,6 @@ class CheckpointTest < Test::Unit::TestCase
     jack = Customer.new "Jack", "Harkness", "97-865-4321"
     martha.checkpoint
     martha.marries(jack)
-    assert_equal({"@last" => "Harkness"}, martha.changes)
+    assert_equal({ "@last" => "Harkness" }, martha.changes)
   end
 end
