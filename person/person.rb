@@ -3,7 +3,7 @@ class Person < Struct.new(:last, :first, :middle)
     [first, middle, last].compact.join(" ")
   end
 
-  def full_name_variant
+  def citation_name
     ["#{last},", first, middle].compact.join(" ")
   end
 end

@@ -8,15 +8,15 @@ class PersonClient < Test::Unit::TestCase
   end
 
   def client2(person)
-    person.full_name_variant
+    person.citation_name
   end
 
   def client3(out, person)
-    out << person.full_name_variant
+    out << person.citation_name
   end
 
   def client4(person)
-    person.full_name_variant
+    person.citation_name
   end
 
   def test_clients
