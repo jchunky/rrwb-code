@@ -1,20 +1,40 @@
+class VarValues
+  attr_reader :values
+
+  def initialize(obj, variables)
+    @values = to_values(obj, variables)
+  end
+
+  def changes(other)
+    other
+      .values
+      .reject { |k, v| values[k] == v }
+  end
+
+  private
+
+  def to_values(obj, variables)
+    variables
+      .map { |var| [var.to_s, obj.instance_variable_get(var)] }
+      .to_h
+      .except("@state")
+  end
+end
+
 module Checkpoint
   def checkpoint
     @state = var_values
   end
 
-  def var_values
-    result = {}
-    instance_variables.each do |var|
-      result[var] = instance_variable_get var
-    end
-    result
-  end
-  
   def changes
-    var_values.reject { |k,v| k == "@state" || @state[k] == v }
+    @state.changes(var_values)
   end
-  
+
+  private
+
+  def var_values
+    VarValues.new(self, instance_variables)
+  end
 end
 
 class Object
