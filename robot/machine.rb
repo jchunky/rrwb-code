@@ -23,4 +23,13 @@ class Machine
       bin,
     ].join
   end
+
+  def location_string
+    " location=#{name}"
+  end
+end
+
+NO_LOCATION = Machine.new("", "")
+def NO_LOCATION.location_string
+  ""
 end

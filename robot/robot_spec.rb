@@ -8,7 +8,7 @@ describe Robot, "when new" do
   end
 
   it "has no location yet" do
-    @robot.location.should be_nil
+    @robot.location.should == NO_LOCATION
   end
 
   it "does not point at a bin yet" do

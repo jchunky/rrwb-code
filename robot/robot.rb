@@ -3,6 +3,7 @@ class Robot
 
   def initialize
     @bin = NO_BIN
+    @location = NO_LOCATION
   end
 
   def move_to(location)
@@ -21,7 +22,7 @@ class Robot
   def to_s
     [
       "Robot",
-      location && " location=#{location.name}",
+      location.location_string,
       bin,
     ].join
   end
