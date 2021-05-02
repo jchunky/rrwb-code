@@ -1,11 +1,10 @@
-require 'matcher'
-require 'test/unit'
+require_relative "matcher"
+require "test/unit"
 
 class MatcherTest < Test::Unit::TestCase
-
-	def setup
-		@numbers = [10, 50, 30, 98]
-	end
+  def setup
+    @numbers = [10, 50, 30, 98]
+  end
 
   def test_different_lengths_rejected
     assert !Matcher.new.match(@numbers, @numbers + [1], 100, 5)
@@ -29,5 +28,4 @@ class MatcherTest < Test::Unit::TestCase
   def test_variation_greater_than_delta_rejected
     assert !Matcher.new.match(@numbers, [10, 60, 30, 98], 100, 5)
   end
-
 end
