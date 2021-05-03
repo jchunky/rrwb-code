@@ -43,9 +43,58 @@ class GameTest < Test::Unit::TestCase
 
   def test_win_conditions
     game = Game.new(<<~BOARD.delete("\n"))
+      XXX
+      ---
+      ---
+    BOARD
+    assert_equal("X", game.winner)
+
+    game = Game.new(<<~BOARD.delete("\n"))
       ---
       XXX
       ---
+    BOARD
+    assert_equal("X", game.winner)
+
+    game = Game.new(<<~BOARD.delete("\n"))
+      ---
+      ---
+      XXX
+    BOARD
+    assert_equal("X", game.winner)
+
+    game = Game.new(<<~BOARD.delete("\n"))
+      X--
+      X--
+      X--
+    BOARD
+    assert_equal("X", game.winner)
+
+    game = Game.new(<<~BOARD.delete("\n"))
+      -X-
+      -X-
+      -X-
+    BOARD
+    assert_equal("X", game.winner)
+
+    game = Game.new(<<~BOARD.delete("\n"))
+      --X
+      --X
+      --X
+    BOARD
+    assert_equal("X", game.winner)
+
+    game = Game.new(<<~BOARD.delete("\n"))
+      X--
+      -X-
+      --X
+    BOARD
+    assert_equal("X", game.winner)
+
+    game = Game.new(<<~BOARD.delete("\n"))
+      --X
+      -X-
+      X--
     BOARD
     assert_equal("X", game.winner)
   end
