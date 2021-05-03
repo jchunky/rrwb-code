@@ -1,15 +1,8 @@
-class Game
+class Game < Struct.new(:board)
   NO_MOVE = -1
   UNOCCUPIED = "-"
   ROWS = 3
   COLS = 3
-
-  attr_accessor :board
-
-  def initialize(board, position = nil, player = nil)
-    @board = board.clone
-    @board[position] = player if position
-  end
 
   def best_move_for(player)
     winning_move = nil
@@ -29,26 +22,48 @@ class Game
   end
 
   def play(move, player)
-    Game.new(board, move, player)
+    board = self.board.clone
+    board[move] = player
+    Game.new(board)
   end
 
   def winner
-    COLS.times.each do |col|
-      squares = [board[col], board[col + 3], board[col + 6]]
+    COLS.times.each do |i|
+      squares = col(i)
       return squares.first if squares.uniq.one? && squares.first != UNOCCUPIED
     end
 
-    ROWS.times.each do |row|
-      squares = [board[row * 3], board[row * 3 + 1], board[row * 3 + 2]]
+    ROWS.times.each do |i|
+      squares = row(i)
       return squares.first if squares.uniq.one? && squares.first != UNOCCUPIED
     end
 
-    squares = [board[0], board[4], board[8]]
+    squares = diagonal1
     return squares.first if squares.uniq.one? && squares.first != UNOCCUPIED
 
-    squares = [board[2], board[4], board[6]]
+    squares = diagonal2
     return squares.first if squares.uniq.one? && squares.first != UNOCCUPIED
 
     UNOCCUPIED
+  end
+
+  def col(i)
+    [cell(0, i), cell(1, i), cell(2, i)]
+  end
+
+  def row(i)
+    [cell(i, 0), cell(i, 1), cell(i, 2)]
+  end
+
+  def diagonal1
+    [cell(0, 0), cell(1, 1), cell(2, 2)]
+  end
+
+  def diagonal2
+    [cell(0, 2), cell(1, 1), cell(2, 0)]
+  end
+
+  def cell(row, col)
+    board[row * 3 + col]
   end
 end
