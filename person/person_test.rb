@@ -1,42 +1,23 @@
-require 'stringio'
-require 'test/unit'
+require "stringio"
+require "test/unit"
 
-require_relative 'person'
+require_relative "person"
 
 class PersonClient < Test::Unit::TestCase
-
   def client1(out, person)
-    out.write(person.first)
-    out.write(" ")
-    if person.middle != nil
-      out.write(person.middle)
-      out.write(" ")
-    end
-    out.write(person.last)
+    out.write(person.full_name)
   end
 
   def client2(person)
-    result = person.last + ", " + person.first
-    if (person.middle != nil)
-      result += " " + person.middle
-		end
-    return result
+    person.citation_name
   end
 
   def client3(out, person)
-    out.write(person.last)
-    out.write(", ")
-    out.write(person.first)
-    if (person.middle != nil)
-      out.write(" ")
-      out.write(person.middle)
-    end
+    out.write(person.citation_name)
   end
 
   def client4(person)
-    return person.last + ", " +
-         person.first +
-         ((person.middle == nil) ? "" : " " + person.middle)
+    person.citation_name
   end
 
   def test_clients
