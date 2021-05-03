@@ -1,15 +1,17 @@
+class Array
+  def clip(clip_limit)
+    map { |val| [val, clip_limit].min }
+  end
+
+  def similar?(other, delta)
+    size == other.size &&
+      zip(other).all? { |v1, v2| (v1 - v2).abs <= delta }
+  end
+end
+
 class Matcher
-  def match(expected, actual, clip_limit, delta) 
-    # Clip "too-large" values
-    actual = actual.map { |val| [val, clip_limit].min }
-
-    # Check for length differences
-    return false if actual.length != expected.length
-
-    # Check that each entry is within expected +/- delta
-    actual.each_index { |i|
-      return false if (expected[i] - actual[i]).abs > delta
-    }
-    return true
+  def match(expected, actual, clip_limit, delta)
+    actual = actual.clip(clip_limit)
+    expected.similar?(actual, delta)
   end
 end
