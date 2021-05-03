@@ -1,10 +1,19 @@
-class ArrayQueue < Array
+require "active_support/all"
+
+class ArrayQueue
+  attr_reader :array
+
+  delegate :length, to: :array
+
+  def initialize
+    @array = []
+  end
 
   def add_rear(s)
-    self << s
+    array << s
   end
 
   def remove_front
-    self.delete_at(0)
+    array.shift
   end
 end

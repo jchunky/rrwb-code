@@ -1,5 +1,5 @@
-require_relative 'array_queue'
-require 'test/unit'
+require_relative "array_queue"
+require "test/unit"
 
 class ArrayQueueTest < Test::Unit::TestCase
   def test_queue_invariant
