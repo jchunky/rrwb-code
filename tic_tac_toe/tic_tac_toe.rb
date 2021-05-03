@@ -33,9 +33,21 @@ class Game
   end
 
   def winner
-    return board[0] if !occupied?(0) && board[0] == board[1] && board[1] == board[2]
-    return board[3] if !occupied?(3) && board[3] == board[4] && board[4] == board[5]
-    return board[6] if !occupied?(6) && board[6] == board[7] && board[7] == board[8]
+    COLS.times.each do |col|
+      squares = [board[col], board[col + 3], board[col + 6]]
+      return squares.first if squares.uniq.one? && squares.first != UNOCCUPIED
+    end
+
+    ROWS.times.each do |row|
+      squares = [board[row * 3], board[row * 3 + 1], board[row * 3 + 2]]
+      return squares.first if squares.uniq.one? && squares.first != UNOCCUPIED
+    end
+
+    squares = [board[0], board[4], board[8]]
+    return squares.first if squares.uniq.one? && squares.first != UNOCCUPIED
+
+    squares = [board[2], board[4], board[6]]
+    return squares.first if squares.uniq.one? && squares.first != UNOCCUPIED
 
     UNOCCUPIED
   end
