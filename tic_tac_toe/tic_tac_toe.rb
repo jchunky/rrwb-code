@@ -4,17 +4,24 @@ class Game < Struct.new(:board)
   ROWS = 3
   COLS = 3
 
-  def best_move_for(player)
-    winning_move = nil
-    default_move = NO_MOVE
-    board.size.times.each do |move|
-      next if occupied?(move)
+  class Move < Struct.new(:i, :score)
+  end
 
+  def best_move_for(player)
+    best_move = Move.new(-1, -1)
+    each_move do |move|
       game = play(move, player)
-      winning_move = move if game.winner == player
-      default_move = move
+      if game.winner == player
+        best_move = move
+        best_move.score = 100
+      end
+
+      if best_move.score < 0
+        best_move = move
+        best_move.score = 0
+      end
     end
-    winning_move || default_move
+    best_move.i
   end
 
   def winner
@@ -27,13 +34,21 @@ class Game < Struct.new(:board)
 
   private
 
-  def occupied?(move)
-    board[move] != UNOCCUPIED
+  def each_move
+    board.size.times.each do |move|
+      next unless can_move?(move)
+
+      yield Move.new(move)
+    end
+  end
+
+  def can_move?(move)
+    board[move] == UNOCCUPIED
   end
 
   def play(move, player)
     board = self.board.clone
-    board[move] = player
+    board[move.i] = player
     Game.new(board)
   end
 

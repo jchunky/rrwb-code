@@ -22,7 +22,7 @@ class GameTest < Test::Unit::TestCase
       ---
       ---
     BOARD
-    assert_equal(8, game.best_move_for("X"))
+    assert_equal(0, game.best_move_for("X"))
 
     game = Game.new(<<~BOARD.delete("\n"))
       XXX
