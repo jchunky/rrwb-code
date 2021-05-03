@@ -8,28 +8,28 @@ class GameTest < Test::Unit::TestCase
       OX-
       OXO
     BOARD
-    assert_equal(5, game.move("X"))
+    assert_equal(5, game.best_move_for("X"))
 
     game = Game.new(<<~BOARD.delete("\n"))
       XOX
       OXO
       OX-
     BOARD
-    assert_equal(8, game.move("O"))
+    assert_equal(8, game.best_move_for("O"))
 
     game = Game.new(<<~BOARD.delete("\n"))
       ---
       ---
       ---
     BOARD
-    assert_equal(0, game.move("X"))
+    assert_equal(0, game.best_move_for("X"))
 
     game = Game.new(<<~BOARD.delete("\n"))
       XXX
       XXX
       XXX
     BOARD
-    assert_equal(-1, game.move("X"))
+    assert_equal(-1, game.best_move_for("X"))
   end
 
   def test_find_winning_move
@@ -38,7 +38,7 @@ class GameTest < Test::Unit::TestCase
       XX-
       OOX
     BOARD
-    assert_equal(5, game.move("X"))
+    assert_equal(5, game.best_move_for("X"))
   end
 
   def test_win_conditions
