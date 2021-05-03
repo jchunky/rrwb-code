@@ -34,7 +34,7 @@ class GameTest < Test::Unit::TestCase
 
   def test_find_winning_move
     game = Game.new(<<~BOARD.delete("\n"))
-      XO-
+      OO-
       XX-
       OOX
     BOARD
