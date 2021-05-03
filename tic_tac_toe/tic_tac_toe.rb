@@ -1,40 +1,82 @@
-class Game
-  attr_accessor :board
-
-  def initialize(s, position=nil, player=nil)
-    @board = s.dup
-    @board[position] = player unless position == nil
+class Move < Struct.new(:game, :player, :position, :score)
+  def score
+    game.winner == player ? 100 : 0
   end
+
+  def <=>(other)
+    score <=> other.score
+  end
+end
+
+class Game < Struct.new(:board)
+  NO_MOVE = -1
+  COLS = 3
+  ROWS = 3
 
   def move(player)
-    (0..8).each do |i|
-      if board[i,1] == '-'
-        game = play(i, player)
-        return i if game.winner() == player
-      end
-    end
-
-    (0..8).each { |i| return i if board[i,1] == '-' }
-    return -1
+    moves(player).max&.position || NO_MOVE
   end
 
-  def play(i, player)
-    Game.new(board, i, player)
+  def moves(player)
+    board.size.times
+      .select { |position| can_play?(position) }
+      .map do |position|
+        candidate_game = play(position, player)
+        Move.new(candidate_game, player, position)
+      end
+  end
+
+  def play(position, player)
+    candidate_board = board.clone
+    candidate_board[position] = player
+    Game.new(candidate_board)
   end
 
   def winner
-    if board[0,1] != '-' && board[0,1] == board[1,1] &&
-        board[1,1] == board[2,1]
-      return board[0,1]
+    combinations.each do |cells|
+      return cells.first if cells.first != "-" && cells.uniq.one?
     end
-    if board[3,1] != '-' && board[3,1] == board[4,1] &&
-        board[4,1] == board[5,1]
-      return board[3,1]
-    end
-    if board[6,1] != '-' && board[6,1] == board[7,1] &&
-        board[7,1] == board[8,1]
-      return board[6,1]
-    end
-    return '-'
+
+    "-"
+  end
+
+  def can_play?(position)
+    board[position] == "-"
+  end
+
+  def combinations
+    cols + rows + diagonals
+  end
+
+  def cols
+    COLS.times.map(&method(:col))
+  end
+
+  def col(i)
+    ROWS.times.map { |row| cell(row, i) }
+  end
+
+  def rows
+    ROWS.times.map(&method(:row))
+  end
+
+  def row(i)
+    COLS.times.map { |col| cell(i, col) }
+  end
+
+  def diagonals
+    [diagonal1, diagonal2]
+  end
+
+  def diagonal1
+    3.times.map { |i| cell(i, i) }
+  end
+
+  def diagonal2
+    3.times.map { |i| cell(i, 2 - i) }
+  end
+
+  def cell(row, col)
+    board[row * COLS + col]
   end
 end
