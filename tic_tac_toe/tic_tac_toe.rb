@@ -2,10 +2,15 @@ class Game < Struct.new(:board)
   UNOCCUPIED = "-"
   ROWS = 3
   COLS = 3
+  NO_MOVE = -1
 
   class Move < Struct.new(:game, :player, :i)
     def score
       play.winner == player ? 100 : 0
+    end
+
+    def <=>(other)
+      score <=> other.score
     end
 
     private
@@ -16,17 +21,9 @@ class Game < Struct.new(:board)
       Game.new(board)
     end
   end
-  NO_MOVE = Move.new(nil, nil, -1)
-  def NO_MOVE.score
-    -1
-  end
 
   def best_move_for(player)
-    best_move = NO_MOVE
-    each_move(player) do |move|
-      best_move = move if move.score > best_move.score
-    end
-    best_move.i
+    available_moves(player).max_by(&:score)&.i || NO_MOVE
   end
 
   def winner
@@ -39,12 +36,10 @@ class Game < Struct.new(:board)
 
   private
 
-  def each_move(player)
-    board.size.times.each do |move|
-      next unless can_move?(move)
-
-      yield Move.new(self, player, move)
-    end
+  def available_moves(player)
+    board.size.times
+      .select(&method(:can_move?))
+      .map { |move| Move.new(self, player, move) }
   end
 
   def can_move?(move)
